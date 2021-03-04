@@ -1,6 +1,7 @@
 //find roots of non linear equation using newton rapston method
 #include<iostream>
 #include<math.h>
+#define n 50
 using namespace std;
 float fun(float x)
 {
@@ -18,7 +19,7 @@ int main()
 {
     int i;
 float x,y;
-float query[50], soln[50];
+float query[n];
 //initial guess
 query[0]= 100;
 cout<<"x"<<0<<" = "<<query[0]<<"\n";
