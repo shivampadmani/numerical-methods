@@ -3,12 +3,18 @@
 #include <iostream>
 #include <math.h>
 #include <utility> 
-#include "newton-rapston-method.cpp"
-using namespace std;
-float objfun(float x, float y)
+#include "forward.hpp"
+using namespace autodiff;
+/*float objfun(float x, float y)
 {
     float z;
     z = pow(x, 2) + pow(y,2) + 2 * x + 5;
+    return z;
+}
+float objfunh(float x, float y)
+{
+    float z;
+    z = pow(x+h*y,2) + pow(x+h*y,2) + 2 * (x+h*y) + 5;
     return z;
 }
 float derivativeobj(float x, float y)
@@ -34,13 +40,16 @@ int nrmethod()
 {
 
 }
-
-float main()
+*/
+int main()
 {
-    float set[2];
+    
+    /*float set[2];
     // give initial value.
 cout<<"give initial guess coordinates.";
-cin>> set[0] >> set[1];
+//cin>> set[0] >> set[1];
+set[0]=2;
+set[1]=1;//assumed value as initial.
     // therefore our initial value is (x,y)=(2,1)
     //now we will evaluate partial derivate at these points.
     float delz_wrtx, delz_wrty, value[50][2];
@@ -51,13 +60,22 @@ cin>> set[0] >> set[1];
     delf[1] = delz_wrty;
     int i, j;
     float nextvalue[2];
+    
     for (j = 0; j < 50; j++)
     {
-        for (i = 0; i < 2; i++)
-        {
-            nextvalue[i] = set[i] + (h * delf[i]);
+       
+            pair<float,float> PAIR1;
+            PAIR1.first = set[0];
+            PAIR1.second = delf[0];
+            objfunh(PAIR1.first,PAIR1.second)
+             pair<float,float> PAIR2;
+            PAIR2.first = set[0];
+            PAIR2.second = delf[0];
+            objfunh(PAIR2.first,PAIR2.second)
+            /*nextvalue[i] = set[i] + (h * delf[i]);
             value[j][i] = nextvalue[i];  
-        }
+        
     }
-}
+}*/
+
 }
