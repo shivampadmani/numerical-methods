@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "array": "cpp",
+        "string_view": "cpp",
+        "tuple": "cpp",
+        "memory_resource": "cpp",
+        "functional": "cpp",
+        "cmath": "cpp",
+        "random": "cpp"
+    }
+}

@@ -3,16 +3,16 @@
 #include<math.h>
 #define n 50
 using namespace std;
-float fun(float x)
+float nextvalue(float x)
 {
     float y;
-    y= x*x*x - 27;
+    y=56*x*x + 56*x + 14;
     return y;
 }
-float delfun(float x)
+float derivativeofnextvalue(float x)
 {
     float y;
-    y = 3*x*x;
+    y =2*56*x + 56;
     return y;
 }
 int main()
@@ -23,12 +23,15 @@ float query[n];
 //initial guess
 query[0]= 100;
 cout<<"x"<<0<<" = "<<query[0]<<"\n";
-query[1] = query[0] - (delfun(query[0])/fun(query[0]));
+query[1] = query[0] - (derivativeofnextvalue(query[0])/nextvalue(query[0]));
 float z=1;
+float answer;
 for(i=0;i<50;i++)
 {
-    z = fun(query[i])/delfun(query[i]);
+    z = nextvalue(query[i])/derivativeofnextvalue(query[i]);
     query[i+1] = query[i] - z;
-    cout<<"x"<<i+1<<" = "<<query[i+1]<<"\n";
+    if(query[i]==query[i-1])
+    answer=query[i];
 }
+cout<<"Answer is "<<answer<<endl;
 }

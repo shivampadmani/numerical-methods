@@ -3,43 +3,43 @@
 #include <iostream>
 using namespace std;
 #include <math.h>
-#define n 50
-#include "forward.hpp"
+#include <autodiff/forward/forward.hpp>
 using namespace autodiff;
-dual f(dual x, dual y)
+dual f(dual x, dual y, dual z)
 {
-
-    return pow(x, 2) + pow(y, 2) + 2 * x + 4;
+    return pow(x, 2) + pow(y, 2) + pow(z, 2);
 }
 int main()
 {
-    
-    //Suppose initial value first
-    dual x = 2.0; // the input variable x
-    dual y = 1.0; // the input variable y
-    dual u = f(x, y);//call function
-    int i,j;
-    dual val[n][2];
-    val[0][0] = x;
-    val[0][1] = y;
-cout<<"First initialized value are : \n" <<endl;
-    cout <<"x0 = "<< val[0][0] << endl;
-    cout <<"y0 = "<< val[0][1] << endl;
-
-    
-for (i=0;i<1;i++){      //outer loop to iterate our values
-//cout<<"\n Next value"<<val[i][1]<<" , " << val[i][2] <<endl;
-}
-  
-    double    p = (double)val[i][0];
-double q = (double)val[i][1];
-    double dudx = derivative(f, wrt(x), at(x, y));
-    double dudy = derivative(f, wrt(y), at(x, y));
-
-    cout << "u = " << u << endl;        // print the evaluated output u
-    cout << "du/dx = " << dudx << endl; // print the evaluated derivative du/dx
-    cout << "du/dy = " << dudy << endl; // print the evaluated derivative du/dx
-    //to calculate gradient, evaluate partial derivaties at those point.
-    double delu[2] = {dudx,dudy};
-
+    //dual initial[] = {1,2,3}; //initial point (x,y,z)
+    int i;
+    //Iteration 1
+    dual x = 1.0; // the input variable x
+    dual y = 2.0; // the input variable y
+    dual z = 3.0; // the input variable z
+    for (i = 0; i < 2; i++)
+    {
+        dual x0[] = {x, y, z};
+        dual u = f(x, y, z);                              // the output scalar u = f(x, y, z)
+        double dudx = derivative(f, wrt(x), at(x, y, z)); // evaluate du/dx
+        double dudy = derivative(f, wrt(y), at(x, y, z)); // evaluate du/dy
+        double dudz = derivative(f, wrt(z), at(x, y, z)); // evaluate du/dz
+        //double del_f[] = {dfdx,dfdy,dfdz};
+        cout << "u = " << u << endl;
+        cout << "du/dx = " << dudx << endl;
+        cout << "du/dy = " << dudy << endl;
+        cout << "du/dz = " << dudz << endl;
+        double delf1[3] = {dudx, dudy, dudz};
+        dual x2[3];
+        int j = 0;
+        double h = -0.5; //length of interval to cover(determined from nr method)
+        for (j = 0; j < 3; j++)
+        {
+            x2[i] = x0[i] + h * delf1[i];
+            cout << x2[i] << endl;
+        }
+        x = x2[0];
+        y = x2[1];
+        z = x2[2];
+    }
 }
