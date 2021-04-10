@@ -19,6 +19,7 @@ int main()
     dual z = 3.0; // the input variable z
     for (i = 0; i < 2; i++)
     {
+        cout<<"Iteration no. "<<i+1<<endl;
         dual x0[] = {x, y, z};
         dual u = f(x, y, z);                              // the output scalar u = f(x, y, z)
         double dudx = derivative(f, wrt(x), at(x, y, z)); // evaluate du/dx
